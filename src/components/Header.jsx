@@ -1,5 +1,5 @@
 export default function Header(props) {
-  console.log("Inside Header: ", props);
+  // console.log("Inside Header: ", props);
 
   const { handleSubmit, handleInput } = props;
 

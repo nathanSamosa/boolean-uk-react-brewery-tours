@@ -43,6 +43,8 @@ This exercise gives you another opportunity to interact with an API. It also req
 
 - Start a json-server **with a different port than the React server**, use the following command `json-server --watch db.json -p 4000`
 - Read the "Open Brewery DB" documentation: https://www.openbrewerydb.org/documentation/01-listbreweries
+(https://api.openbrewerydb.org/breweries?by_state=ohio)
+
 - Think about which request type to use
 - Render the main section with the breweries list you get from your search by state fetch
 - When a form is submitted, its data should be saved in the json-server

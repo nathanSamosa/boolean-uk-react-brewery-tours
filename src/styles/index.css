@@ -161,16 +161,75 @@ article {
 
   padding: 1rem 2rem;
 
+  border-radius: 0.25rem;
+  border: 1px solid #000;
+}
+
+.brewery-info {
   display: grid;
   grid-template-areas:
     "heading heading type"
     "address phone ."
-    ". . link";
-  grid-template-columns: repeat(2, 1fr) minmax(140px, auto);
-  grid-template-rows: repeat(3, auto);
+    ". . button-container";
+  grid-template-columns: repeat(2, 1fr) minmax(280px, auto);
+  grid-template-rows: repeat(4, auto);
+}
+
+.booking-form {
+  grid-area: form;
+  background-color: rgb(235, 235, 235);
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  border: 1px solid grey;
+  margin-top: 10px;
+}
+
+.booking-form h3 {
+  text-align: center;
+}
+
+.booking-form .form-input {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  row-gap: 5px;
+}
+
+.form-submit {
+  margin-top: 20px;
+}
+
+.button-container {
+  grid-area: button-container;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.breweries-list li .link a,
+.booking button {
+  display: block;
+  padding: 0.5rem 1rem;
 
   border-radius: 0.25rem;
-  border: 1px solid #000;
+  background-color: #1565c0;
+  color: #fff;
+
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.booking button {
+  width: minmax(140px, auto);
+  padding-right: 15px;
+  border: none;
+  text-align: right;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: rgb(189, 189, 189);
 }
 
 .breweries-list li h2 {
@@ -221,16 +280,3 @@ article {
   grid-area: link;
 }
 
-.breweries-list li .link a {
-  display: block;
-  padding: 0.5rem 1rem;
-
-  border-radius: 0.25rem;
-  background-color: #1565c0;
-  color: #fff;
-
-  text-transform: uppercase;
-  text-align: center;
-  text-decoration: none;
-  font-weight: bold;
-}
