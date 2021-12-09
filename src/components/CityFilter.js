@@ -1,9 +1,21 @@
 const CityFilter = props => {
     const renderedCities = [];
 
-    const handleCityFilterChange = event => {
+    props.setFilteredBreweries(props.breweries);
 
+    const handleCityFilterChange = event => {
+        let cities = [];
+        if(props.filters.filterByCity.includes(event.target.value)){
+            props.filters.filterByCity.splice(props.filters.filterByCity.indexOf(event.target.value), 1);
+            cities = [...props.filters.filterByCity];
+        }
+        else {
+            cities = [...props.filters.filterByCity, event.target.value];
+        }
+        props.setFilters({...props.filters, filterByCity: cities});
     }
+
+    console.log('CityFilter > props.filters: ', props.filters);
 
     return(
         <>

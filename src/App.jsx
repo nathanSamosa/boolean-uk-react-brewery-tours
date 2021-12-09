@@ -2,12 +2,15 @@ import { useState, useEffect } from "react";
 
 import Header from "./components/Header";
 import ListOfBreweriesHeader from "./components/ListOfBreweriesHeader";
+import TypeFilter from "./components/TypeFilter";
 import CityFilter from "./components/CityFilter";
+import BookingForm from "./components/BookingForm";
 
 export default function App() {
     const [breweries, setBreweries] = useState([]);
     const [selectedState, setSelectedState] = useState("");
     const [filters, setFilters] = useState({filterByCity: [], filterByType: '', filterByName: ''});
+    const [filteredBreweries, setFilteredBreweries] = useState([]);
 
     let stateString;
 
@@ -26,14 +29,16 @@ export default function App() {
     const fetchData = async () => {
         const res = await fetch(`https://api.openbrewerydb.org/breweries?by_state=${selectedState}`);
         const data = await res.json();
-        console.log('Breweries fetched: ', data);
+        
         return data;
     }
 
     useEffect(async () => {
         if(selectedState !== ""){
             const data = await fetchData();
-            setBreweries(data);
+            const cleanData = data.filter(brewery => brewery.brewery_type === "micro" || brewery.brewery_type === "regional" || brewery.brewery_type === "brewpub")
+            console.log('Breweries fetched: ', cleanData);
+            setBreweries(cleanData);
         }
     }, [selectedState]);
 
@@ -46,22 +51,30 @@ export default function App() {
             <main>
                 <aside className="filters-section">
                     <h2>Filter By:</h2>
-                    <form id="filter-by-type-form" autocompete="off">
-                        <label for="filter-by-type"><h3>Type of Brewery</h3></label>
-                        <select name="filter-by-type" id="filter-by-type">
-                        <option value="">Select a type...</option>
-                        <option value="micro">Micro</option>
-                        <option value="regional">Regional</option>
-                        <option value="brewpub">Brewpub</option>
-                        </select>
-                    </form>
+                    <TypeFilter 
+                        breweries={breweries}
+                        filters={filters}
+                        setFilters={setFilters}
+                        filteredBreweries={filteredBreweries}
+                        setFilteredBreweries={setFilteredBreweries}
+                    />
                     <CityFilter 
                         breweries={breweries}
                         filters={filters}
                         setFilters={setFilters}
+                        filteredBreweries={filteredBreweries}
+                        setFilteredBreweries={setFilteredBreweries}
                     />
                 </aside>
-                {selectedState && <ListOfBreweriesHeader selectedState={selectedState}/>}
+                {selectedState && 
+                    <ListOfBreweriesHeader 
+                        selectedState={selectedState}
+                        breweries={breweries}
+                        filters={filters}
+                        setFilters={setFilters}
+                        filteredBreweries={filteredBreweries}
+                        setFilteredBreweries={setFilteredBreweries}
+                    />}
                 <article>
                     <ul className="breweries-list">
                         {breweries.map((brewery, index) => {
@@ -88,69 +101,14 @@ export default function App() {
                                                 </button>
                                             </section>
                                             <section className="link">
-                                                <a href={brewery.website_url} target="_blank">
+                                                <a href={brewery.website_url} target="_blank" rel="noreferrer">
                                                     Visit Website
                                                 </a>
                                             </section>
                                         </div>
 
                                     </div>
-                                    <section className="booking-form">
-                                        <h3>Book a tour:</h3>
-                                        <form>
-                                            <div className="form-input">
-                                                <label htmlFor="firstName">First Name</label>
-                                                <input
-                                                    id="firstName"
-                                                    type="text"
-                                                    name="firstName"
-                                                    value=""
-                                                />
-                                                <label htmlFor="lastName">Last Name</label>
-                                                <input
-                                                    id="lastName"
-                                                    type="text"
-                                                    name="firstName"
-                                                    value=""
-                                                />
-                                                <label htmlfor="date">Tour date</label>
-                                                <input
-                                                    id="date"
-                                                    type="date"
-                                                    name="date"
-                                                    value=""
-                                                />
-                                                
-                                                <label htmlfor="time">Time</label>
-                                                <input
-                                                    id="time"
-                                                    type="time"
-                                                    name="time"
-                                                    min="09:00"
-                                                    max="18:00"
-                                                    step="3600"
-                                                    value=""
-                                                />
-                                                
-                                                <label htmlfor="people">No. people</label>
-                                                <input
-                                                    id="people"
-                                                    type="number"
-                                                    min="1"
-                                                    max="10"
-                                                    name="peopleCount"
-                                                    value=""
-                                                />
-                                            </div>
-                                            
-
-                                            <input className="form-submit"
-                                                type="submit"
-                                                value="Book Now!"
-                                            />
-
-                                        </form>
-                                    </section>
+                                    <BookingForm />
                                 </li>
                             </>
                             );
