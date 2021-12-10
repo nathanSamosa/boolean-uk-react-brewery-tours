@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 
 import Header from "./components/Header";
 import ListOfBreweriesHeader from "./components/ListOfBreweriesHeader";
-import TypeFilter from "./components/TypeFilter";
-import CityFilter from "./components/CityFilter";
+import FilterSection from "./components/FiltersSection";
 import BookingForm from "./components/BookingForm";
 
 export default function App() {
@@ -49,23 +48,15 @@ export default function App() {
                 handleInput={handleSelectStateInput}
             />
             <main>
-                <aside className="filters-section">
-                    <h2>Filter By:</h2>
-                    <TypeFilter 
-                        breweries={breweries}
-                        filters={filters}
-                        setFilters={setFilters}
-                        filteredBreweries={filteredBreweries}
-                        setFilteredBreweries={setFilteredBreweries}
+                {selectedState &&
+                    <FilterSection 
+                    breweries={breweries}
+                    filters={filters}
+                    setFilters={setFilters}
+                    filteredBreweries={filteredBreweries}
+                    setFilteredBreweries={setFilteredBreweries}
                     />
-                    <CityFilter 
-                        breweries={breweries}
-                        filters={filters}
-                        setFilters={setFilters}
-                        filteredBreweries={filteredBreweries}
-                        setFilteredBreweries={setFilteredBreweries}
-                    />
-                </aside>
+                }
                 {selectedState && 
                     <ListOfBreweriesHeader 
                         selectedState={selectedState}
@@ -74,12 +65,13 @@ export default function App() {
                         setFilters={setFilters}
                         filteredBreweries={filteredBreweries}
                         setFilteredBreweries={setFilteredBreweries}
-                    />}
+                    />
+                }
                 <article>
                     <ul className="breweries-list">
+                        //filtered? call filtered : call breweries (files created)
                         {breweries.map((brewery, index) => {
                             return (
-                                <>
                                 <li key={index}>
                                     <div className="brewery-info">
                                         <h2>{brewery.name}</h2>
@@ -110,7 +102,6 @@ export default function App() {
                                     </div>
                                     <BookingForm />
                                 </li>
-                            </>
                             );
                         })}
                     </ul>
