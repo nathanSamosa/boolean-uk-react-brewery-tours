@@ -1,12 +1,11 @@
 const TypeFilter = props => {
 
-    props.setFilteredBreweries(props.breweries);
     const handleTypeFilterChange = event => {
         const filter = event.target.value;
         props.setFilters({...props.filters, filterByType: filter});
     }
 
-    console.log('TypeFilter > props.filters: ', props.filters);
+    //console.log('TypeFilter > props.filters: ', props.filters);
 
     return(
         <form id="filter-by-type-form" autocompete="off">

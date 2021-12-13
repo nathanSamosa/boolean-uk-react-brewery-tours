@@ -1,6 +1,6 @@
 const ListOfBreweriesHeader = props => {
 
-    props.setFilteredBreweries(props.breweries);
+    //props.setFilteredBreweries(props.breweries);
     
     const handleNameFilterChange = event => {
         const filter = event.target.value;
@@ -12,7 +12,7 @@ const ListOfBreweriesHeader = props => {
         console.log('write handle name filter submit');
     }
 
-    console.log('ListOfBreweriesHeader > props.filters: ', props.filters);
+    //console.log('ListOfBreweriesHeader > props.filters: ', props.filters);
 
     return(
         <>

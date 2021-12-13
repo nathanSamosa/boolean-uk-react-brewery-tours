@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 const initialBookingForm = {
+    breweryName: "",
     firstName: "",
     lastName: "",
     date: "",
@@ -8,33 +9,40 @@ const initialBookingForm = {
     noPeople: ""
 }
 
-const BookingForm = () => {
+const BookingForm = props => {
     const [bookingForm, setBookingForm] = useState(initialBookingForm);
-    let postBookingToJson = false;
+    const [push, setPush] = useState(false);
 
     const handleBookingChange = event => {
         const {name, value} = event.target;
-        console.log({name, value});
         setBookingForm({...bookingForm, [name]: value});
     }
 
     const handleBookingSubmit = event => {
         event.preventDefault();
-        setBookingForm(bookingForm);
-        postBookingToJson = true;
+        setPush(true);
+        setBookingForm({...bookingForm, breweryName: props.brewery.name});
     }
 
     const pushBookingData = async () => {
-        //Code
+        console.log(bookingForm)
+        await fetch("http://localhost:4000/bookings", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'  
+            },
+            body: JSON.stringify(bookingForm)
+        });
     }
 
-    useEffect(() => {
-        if(postBookingToJson){
-            pushBookingData();
+    useEffect(async () => {
+        if(push){
+            await pushBookingData();
+            setPush(false)
         }
-    }, [postBookingToJson])
+    }, [push])
 
-    console.log('bookingForm:', bookingForm);
+    //console.log('bookingForm:', bookingForm);
 
     return (
         <section className="booking-form">

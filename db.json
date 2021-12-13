@@ -1,3 +1,56 @@
 {
-  "bookings": []
+  "bookings": [
+    {
+      "firstName": "Nathan",
+      "lastName": "Quinn",
+      "date": "2021-12-10",
+      "time": "16:00",
+      "noPeople": "3",
+      "id": 1
+    },
+    {
+      "firstName": "Nathan",
+      "lastName": "Quinn",
+      "date": "2021-12-24",
+      "time": "15:00",
+      "noPeople": "5",
+      "id": 2
+    },
+    {
+      "breweryName": "13 Below Brewery",
+      "firstName": "Heather",
+      "lastName": "Reid",
+      "date": "2021-12-15",
+      "time": "15:00",
+      "noPeople": "3",
+      "id": 3
+    },
+    {
+      "breweryName": "13 Below Brewery",
+      "firstName": "nathan",
+      "lastName": "Reid",
+      "date": "2021-12-16",
+      "time": "13:00",
+      "noPeople": "5",
+      "id": 4
+    },
+    {
+      "breweryName": "13 Below Brewery",
+      "firstName": "Nathan",
+      "lastName": "Quinn",
+      "date": "2021-12-18",
+      "time": "11:00",
+      "noPeople": "6",
+      "id": 5
+    },
+    {
+      "breweryName": "13 Below Brewery",
+      "firstName": "Claire",
+      "lastName": "Sihota",
+      "date": "2021-12-15",
+      "time": "16:00",
+      "noPeople": "4",
+      "id": 6
+    }
+  ]
 }
